@@ -151,7 +151,7 @@ function displayThrow(p1Choice, p2Choice) {
 function resolveThrow() {
     var playerMatchup = matchupArray[randomChoiceHelperArray.indexOf(rpsThrow.playerChoice)];
     var resolutionVal = playerMatchup[randomChoiceHelperArray.indexOf(rpsThrow.opponentChoice)];
-    console.log(rpsThrow.playerChoice + " vs. " + rpsThrow.opponentChoice + "...")
+    console.log(rpsThrow.playerChoice + " VS " + rpsThrow.opponentChoice + "...")
     displayThrow(rpsThrow.playerChoice, rpsThrow.opponentChoice);
     if (!resolutionVal) {
         console.log("Draw!");
