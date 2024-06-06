@@ -5,7 +5,8 @@ var playerCurrentWins;
 var opponentCurrentWins;
 var savedPlayers = [];
 var choiceButtons = [];
-
+var simpleButton;
+var advancedButton;
 
 var currentPlayers = {
     player1: null,
@@ -20,9 +21,10 @@ var matchupArray = [
     [0, 2, 1, 1, 2, 0], [1, 0, 2, 0, 1, 2], [2, 1, 0, 2, 0, 1], [2, 0, 1, 0, 1, 2], [1, 2, 0, 2, 0, 1], [0, 1, 2, 1, 2, 0]
 ]
 var randomChoiceHelperArray = ['rock', 'paper', 'scissors', 'lizard', 'alien', 'ufo'];
+var randomChoiceHelperArraySimple = ['rock', 'paper', 'scissors'];
 
-
-
+var startPage = document.querySelector('.start-page');
+var gamePage = document.querySelector('.game-page');
 var playerSide = document.querySelector('.player-area');
 var opponentSide = document.querySelector('.opponent-area');
 var playerChoiceImage = document.querySelector('.image-box1');
@@ -36,16 +38,22 @@ function getRandomIndex(array) {
 }
 
 function onLoad() {
+
     for (var j = 0; j < 6; j++) {
         choiceButtons[j] = document.querySelector(`.rps-button-${j}`);
         choiceButtons[j].isLocked = false;
         choiceButtons[j].addEventListener('click', setPlayerChoice);
     }
-    currentPlayers.player1 = createPlayer('You', '🐶', 0);
-    currentPlayers.player2 = createPlayer('Computer', '🤖', 0);
-    currentGame = createGame(currentPlayers.player1, currentPlayers.player2);
+    simpleButton = document.querySelector('.classic-rps');
+    simpleButton.gameTypeChosen = 'simple';
+    simpleButton.addEventListener('click', chooseGameType);
+
+    advancedButton = document.querySelector('.advanced-rps');
+    advancedButton.gameTypeChosen = 'advanced';
+    advancedButton.addEventListener('click', chooseGameType);
 }
 onLoad();
+
 
 function createPlayer(playerName = 'human', playerToken = '👩🏻', playerWins = 0) {
     var player =
@@ -58,6 +66,21 @@ function createPlayer(playerName = 'human', playerToken = '👩🏻', playerWins
 }
 
 function chooseGameType() {
+    if (this.gameTypeChosen === 'advanced') {
+        currentPlayers.player1 = createPlayer('You', '🐶', 0);
+        currentPlayers.player2 = createPlayer('Computer', '🤖', 0);
+        currentGame = createGame(currentPlayers.player1, currentPlayers.player2);
+    }
+    else {
+        currentPlayers.player1 = createPlayer('You', '🐶', 0);
+        currentPlayers.player2 = createPlayer('Computer', '🤖', 0);
+        currentGame = createGame(currentPlayers.player1, currentPlayers.player2, 'simple');
+        for (var i = 3; i < 6; i++) {
+            choiceButtons[i].classList.add('hidden');
+        }
+    }
+    startPage.classList.add('hidden');
+    gamePage.classList.remove('hidden');
 
 }
 
@@ -74,16 +97,19 @@ function createGame(p1, p2, gameType = 'advanced') {
 }
 
 function makeOpponentChoice() {
-    var computerThrow = randomChoiceHelperArray[getRandomIndex(randomChoiceHelperArray)];
-    console.log(computerThrow);
-    rpsThrow.opponentChoice = computerThrow;
+    if (currentGame.rpsType === 'advanced') {
+        var computerThrow = randomChoiceHelperArray[getRandomIndex(randomChoiceHelperArray)];
+        console.log(computerThrow);
+        rpsThrow.opponentChoice = computerThrow;
+    }
+    else {
+        var computerThrow = randomChoiceHelperArraySimple[getRandomIndex(randomChoiceHelperArraySimple)];
+        console.log(computerThrow);
+        rpsThrow.opponentChoice = computerThrow;
+    }
     return computerThrow;
 }
 function setPlayerChoice() {
-    // console.log(this.title);
-    // if (this.classList.contains('rock')){
-
-    // }
     rpsThrow.playerChoice = this.title;
     makeOpponentChoice();
     resolveThrow();
@@ -113,8 +139,7 @@ function displayThrow(p1Choice, p2Choice) {
         else if (tempArray[i] === 'alien') {
             thrownImageArray[i] = 'assets/happy-alien.png';
         }
-        else
-        {
+        else {
             thrownImageArray[i] = 'assets/ufo.png';
         }
     }
