@@ -23,6 +23,13 @@ var randomChoiceHelperArray = ['rock', 'paper', 'scissors', 'lizard', 'alien', '
 
 
 
+var playerSide = document.querySelector('.player-area');
+var opponentSide = document.querySelector('.opponent-area');
+var playerChoiceImage = document.querySelector('.image-box1');
+var opponentChoiceImage = document.querySelector('.image-box2');
+
+
+
 
 function getRandomIndex(array) {
     return Math.floor(Math.random() * array.length);
@@ -50,7 +57,7 @@ function createPlayer(playerName = 'human', playerToken = '👩🏻', playerWins
     return player;
 }
 
-function chooseGameType(){
+function chooseGameType() {
 
 }
 
@@ -83,18 +90,44 @@ function setPlayerChoice() {
 }
 
 function sideBarDisplay() {
-    var playerSide = document.querySelector('.player-area');
-    var opponentSide = document.querySelector('.opponent-area');
     playerSide.innerHTML = `<div>Wins:${currentGame.player1.wins}</div>`
     opponentSide.innerHTML = `<div>Wins:${currentGame.player2.wins}</div>`
-    
+
+}
+function displayThrow(p1Choice, p2Choice) {
+    var thrownImageArray = ['', ''];
+    var tempArray = [p1Choice, p2Choice];
+    for (var i = 0; i < tempArray.length; i++) {
+        if (tempArray[i] === 'rock') {
+            thrownImageArray[i] = 'assets/happy-rocks.png';
+        }
+        else if (tempArray[i] === 'paper') {
+            thrownImageArray[i] = 'assets/happy-paper.png';
+        }
+        else if (tempArray[i] === 'scissors') {
+            thrownImageArray[i] = 'assets/happy-scissors.png';
+        }
+        else if (tempArray[i] === 'lizard') {
+            thrownImageArray[i] = 'assets/flat-lizard.png';
+        }
+        else if (tempArray[i] === 'alien') {
+            thrownImageArray[i] = 'assets/happy-alien.png';
+        }
+        else
+        {
+            thrownImageArray[i] = 'assets/ufo.png';
+        }
+    }
+    playerChoiceImage.innerHTML = `<img src=${thrownImageArray[0]} alt="player 1 image">`
+    opponentChoiceImage.innerHTML = `<img src=${thrownImageArray[1]} alt="player 2 image">`
+
 }
 
 function resolveThrow() {
     var playerMatchup = matchupArray[randomChoiceHelperArray.indexOf(rpsThrow.playerChoice)];
     var resolutionVal = playerMatchup[randomChoiceHelperArray.indexOf(rpsThrow.opponentChoice)];
-    console.log(rpsThrow.playerChoice+ " vs. " + rpsThrow.opponentChoice + "...")
-
+    console.log(rpsThrow.playerChoice + " vs. " + rpsThrow.opponentChoice + "...")
+    displayThrow(rpsThrow.playerChoice, rpsThrow.opponentChoice);
     if (!resolutionVal) {
         console.log("Draw!");
     }
