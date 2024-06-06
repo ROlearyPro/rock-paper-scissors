@@ -27,7 +27,7 @@ var playerSide = document.querySelector('.player-area');
 var opponentSide = document.querySelector('.opponent-area');
 var playerChoiceImage = document.querySelector('.image-box1');
 var opponentChoiceImage = document.querySelector('.image-box2');
-
+var announcementText = document.querySelector('.announcement');
 
 
 
@@ -130,14 +130,19 @@ function resolveThrow() {
     displayThrow(rpsThrow.playerChoice, rpsThrow.opponentChoice);
     if (!resolutionVal) {
         console.log("Draw!");
+        announcementText.innerText = "Draw!";
     }
     else if (resolutionVal === 1) {
         console.log("YOU WIN!");
+        announcementText.innerText = "YOU WIN!";
+
         currentGame.player1.wins += 1;
         sideBarDisplay();
     }
     else {
         console.log("You lose...");
+        announcementText.innerText = "You lose...";
+
         currentGame.player2.wins += 1;
         sideBarDisplay();
     }
