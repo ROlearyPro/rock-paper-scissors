@@ -3,7 +3,7 @@ var rpsThrow = {
     opponentChoice: null
 }
 
-var randomChoiceHelperArray = ['rock','paper','scissors','lizard','alien','ufo'];
+var randomChoiceHelperArray = ['rock', 'paper', 'scissors', 'lizard', 'alien', 'ufo'];
 
 var currentGameType;
 var playerCurrentWins;
@@ -15,6 +15,12 @@ var currentPlayers = {
     player2: null,
 };
 choiceButtons = [];
+
+
+matchupArray = [
+    // 0 = draw, 1 = win, 2 = loss
+    [0, 2, 1, 1, 2, 0], [1, 0, 2, 0, 1, 2], [2, 1, 0, 2, 0, 1], [2, 0, 1, 0, 1, 2], [1, 2, 0, 2, 0, 1], [0, 1, 2, 1, 2, 0]
+]
 
 
 
@@ -60,14 +66,32 @@ function makeOpponentChoice() {
     rpsThrow.opponentChoice = computerThrow;
     return computerThrow;
 }
-function setPlayerChoice()
-{
-    console.log(this.title);
+function setPlayerChoice() {
+    // console.log(this.title);
     // if (this.classList.contains('rock')){
 
     // }
+    rpsThrow.playerChoice = this.title;
+    makeOpponentChoice();
+    resolveThrow();
+}
+function sideBarDisplay() {
+
 }
 
-function resolveThrow(){
+function resolveThrow() {
+    var playerMatchup = matchupArray[randomChoiceHelperArray.indexOf(rpsThrow.playerChoice)];
+    var resolutionVal = playerMatchup[randomChoiceHelperArray.indexOf(rpsThrow.opponentChoice)];
+    console.log(rpsThrow.playerChoice+ " vs. " + rpsThrow.opponentChoice + "...")
+
+    if (!resolutionVal) {
+        console.log("Draw!");
+    }
+    else if (resolutionVal === 1) {
+        console.log("YOU WIN!");
+    }
+    else {
+        console.log("You lose...");
+    }
 
 }
