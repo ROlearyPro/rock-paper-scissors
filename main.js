@@ -8,6 +8,8 @@ var choiceButtons = [];
 var simpleButton;
 var advancedButton;
 var clearBoard;
+var storedPlayer;
+var storedOpponent;
 
 var currentPlayers = {
     player1: null,
@@ -83,11 +85,11 @@ function chooseGameType() {
             choiceButtons[i].classList.add('hidden');
         }
     }
-    playerInnerWrap.innerHTML = `<h3>${currentGame.player1.name} <br> ${currentGame.player1.token} </h3>
+    playerInnerWrap.innerHTML = `<h3>${currentGame.player1.name}</h3><h3>${currentGame.player1.token} </h3>
                                     <div class="player-area">
                                     <div>Wins:${currentGame.player1.wins}</div>
                                 </div>`;
-    opponentInnerWrap.innerHTML = `<h3>${currentGame.player2.name} <br> ${currentGame.player2.token}</h3>
+    opponentInnerWrap.innerHTML = `<h3>${currentGame.player2.name}</h3><h3> ${currentGame.player2.token}</h3>
                                 <div class="opponent-area">
                                 <div>Wins:${currentGame.player2.wins}</div>
                             </div>`;
@@ -107,6 +109,17 @@ function createGame(p1, p2, gameType = 'advanced') {
         player2: p2,
         rpsType: gameType,
         currentThrows: rpsThrow,
+    }
+    if (typeof (Storage)) {
+        if (sessionStorage.playerData) {
+            storedPlayer = JSON.parse(sessionStorage.getItem('playerData'));
+            gameObject.player1 = storedPlayer;
+        } else { }
+        if (sessionStorage.opponentData) {
+            storedOpponent = JSON.parse(sessionStorage.getItem('opponentData'));
+            gameObject.player2 = storedOpponent;
+        }
+        else { }
     }
 
     return gameObject;
@@ -191,6 +204,10 @@ function resolveThrow() {
         sideBarDisplay();
     }
 
+    if (typeof (Storage)) {
+        sessionStorage.setItem('playerData', JSON.stringify(currentGame.player1));
+        sessionStorage.setItem('opponentData', JSON.stringify(currentGame.player2));
+    }
     clearBoard = setTimeout(clearGameDisplay, 2000);
 
 }
@@ -201,5 +218,8 @@ function clearGameDisplay() {
     announcementText.innerText = `Make your choice!`;
     imageArea.classList.add('hidden');
     buttonsArea.classList.remove('hidden');
+
+
+
 
 }
