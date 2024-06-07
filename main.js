@@ -33,6 +33,8 @@ var opponentChoiceImage = document.querySelector('.image-box2');
 var announcementText = document.querySelector('.announcement');
 var imageArea = document.querySelector('.boxes-wrap');
 var buttonsArea = document.querySelector('.button-hide-container');
+var playerInnerWrap = document.querySelector('.player-inner-wrap');
+var opponentInnerWrap = document.querySelector('.opponent-inner-wrap');
 
 
 function getRandomIndex(array) {
@@ -81,6 +83,17 @@ function chooseGameType() {
             choiceButtons[i].classList.add('hidden');
         }
     }
+    playerInnerWrap.innerHTML = `<h3>${currentGame.player1.name} <br> ${currentGame.player1.token} </h3>
+                                    <div class="player-area">
+                                    <div>Wins:${currentGame.player1.wins}</div>
+                                </div>`;
+    opponentInnerWrap.innerHTML = `<h3>${currentGame.player2.name} <br> ${currentGame.player2.token}</h3>
+                                <div class="opponent-area">
+                                <div>Wins:${currentGame.player2.wins}</div>
+                            </div>`;
+    playerSide = document.querySelector('.player-area');
+    opponentSide = document.querySelector('.opponent-area');
+
     startPage.classList.add('hidden');
     gamePage.classList.remove('hidden');
 
@@ -95,6 +108,7 @@ function createGame(p1, p2, gameType = 'advanced') {
         rpsType: gameType,
         currentThrows: rpsThrow,
     }
+
     return gameObject;
 }
 
@@ -177,12 +191,11 @@ function resolveThrow() {
         sideBarDisplay();
     }
 
-clearBoard = setTimeout(clearGameDisplay, 2000);
+    clearBoard = setTimeout(clearGameDisplay, 2000);
 
 }
 
-function clearGameDisplay()
-{
+function clearGameDisplay() {
     playerChoiceImage.innerHTML = ``;
     opponentChoiceImage.innerHTML = ``;
     announcementText.innerText = `Make your choice!`;
