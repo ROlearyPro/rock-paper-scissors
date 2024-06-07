@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <title>RPS</title>
 </head>
+
 <body>
     <div class="section-divider">
         <section class="player-side-wrap">
@@ -24,21 +25,22 @@
                     <button class="classic-rps rps-game-button">
                         <h3>Classic!</h3>
                         <h5>Rock > Scissors <br> Scissors > Paper <br> Paper > Rock</h5>
-                        </button>
+                    </button>
                 </div>
                 <div class="choices-container">
                     <button class="advanced-rps rps-game-button">
                         <h3>Advanced!</h3>
-                        <h5>Rock > Scissors, Lizard <br> Scissors > Paper, UFO <br> Paper > Rock, Alien <br> Lizard > Scissors, Alien <br> Alien > Rock, UFO <br> UFO > Paper, Lizard </h5>
-                        </button>
+                        <h5>Rock > Scissors, Lizard <br> Scissors > Paper, UFO <br> Paper > Rock, Alien <br> Lizard >
+                            Scissors, Alien <br> Alien > Rock, UFO <br> UFO > Paper, Lizard </h5>
+                    </button>
 
                 </div>
             </article>
         </article>
         <article class="game-page page-wrap hidden">
             <h1>Rock Paper Scissors+</h1>
-            <h2 class = "announcement">Make your pick!</h2>
-            <article class="boxes-wrap">
+            <h2 class="announcement">Make your pick!</h2>
+            <article class="boxes-wrap hidden">
 
                 <section class="box-wrap box1-wrap">
                     <div class="image-box1 box icon" id="boxOne">
@@ -54,14 +56,17 @@
                     <h4 class="box2-label">Opponent threw:</h4>
                 </section>
             </article>
-
-            <section class="buttons-wrap">
-                <button class="rps-button-0 rock main-button" title="rock">🪨</button>
-                <button class="rps-button-1 paper main-button" title="paper">📜</button>
-                <button class="rps-button-2 scissors main-button" title="scissors">✂️</button>
-                <button class="rps-button-3 lizard main-button" title="lizard">🦎</button>
-                <button class="rps-button-4 alien main-button" title="alien">👽</button>
-                <button class="rps-button-5 ufo main-button" title="ufo">🛸</button>
+            <section class="button-hide-container">
+                <section class="buttons-wrap">
+                    <button class="rps-button-0 rock main-button" title="rock">🪨</button>
+                    <button class="rps-button-1 paper main-button" title="paper">📜</button>
+                    <button class="rps-button-2 scissors main-button" title="scissors">✂️</button>
+                </section>
+                <section class="buttons-wrap">
+                    <button class="rps-button-3 lizard main-button" title="lizard">🦎</button>
+                    <button class="rps-button-4 alien main-button" title="alien">👽</button>
+                    <button class="rps-button-5 ufo main-button" title="ufo">🛸</button>
+                </section>
             </section>
         </article>
 

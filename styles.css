@@ -21,9 +21,7 @@ html {
     align-items: center;
     
   } 
-  .hidden {
-    display: none;
-  }
+ 
   
   .section-divider {
     display: flex;
@@ -35,7 +33,13 @@ html {
   }
   
 
-  
+  .button-hide-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 63em;
+  }
   
   .opponent-side-wrap {
     border-left: 5px solid black;
@@ -45,8 +49,8 @@ html {
     justify-content: space-around;
     background-color: #c98bea;
     height: 100%;
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 15vmin;
+    padding-right: 15vmin;
 
   }
   .player-side-wrap {
@@ -57,38 +61,38 @@ html {
     justify-content: space-around;
     background-color: #c98bea;
     height: 100%;
-    padding-right: 15%;
-    padding-left: 15%;
+    padding-right: 15vmin;
+    padding-left: 15vmin;
 
   }
   
   .boxes-wrap {
     display: inline-flex;
     justify-content: space-around;
-    width: 65em;
-    height: 50vh;
+    width: 63em;
+    height: 50vmin;
   
   }
   .choices-wrap {
     display: inline-flex;
     justify-content: space-around;
-    width: 70%;
-    height: 80vh;
+    width: 63em;
+    height: 50vh;
     flex-direction: column;
     align-items: center;
   }
   .choices-container{
     display: flex;
     justify-content: space-around;
-    width: 65em;
-    height: 20vw;
+    width: 63em;
+    height: 10vmin;
     flex-direction: column;  
     align-items: center;
 }
   .miniboxes-wrap {
     display: inline-flex;
     justify-content: space-around;
-    width: 9vw;
+    /* width: 9vw; */
     height: 10vh;
   
   }
@@ -98,13 +102,14 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
   }
   
   
   .buttons-wrap {
     display: flex;
     justify-content: space-evenly;
-    width: 65%;
+    width: 90%;
   }
   
   /*~~~~~~~~~~~~~~~~~~~~ ACTUAL ELEMENTS ~~~~~~~~~~~~~~~~~~~~*/
@@ -113,8 +118,14 @@ html {
     font-size: 300%;
     font-weight: 950;
     font-family: "verdana", sans-serif;
+    justify-self: flex-start;
   }
-  
+  h2{
+    font-size:350%;
+    font-weight:500;
+    font-family: "verdana", sans-serif;
+
+  }
   .box {
     display: flex;
     width: 10em;
@@ -143,27 +154,26 @@ html {
   }
   
   .main-button {
-    padding: 15;
+    padding: 50;
     background-color: black;
     color: white;
-    width: 15vmin;
-    height: 10%;
-    border-start-end-radius: 120px;
-    border-end-start-radius: 120px;
-    font-size: 125%;
+    width: 25%;
+    height: 25%;
+    border-radius: 400px;
+    font-size: 250%;
     font-weight: 100;
     font-family: "poppins", sans-serif;
   }
 
   .rps-game-button{
     display:flex;
-    padding: 150;
+    padding: 100px;
     background-color: #6503c6;
     color: white;
-    width: 55vmin;
-    height: 10%;
-    border-radius: 50px;
-    font-size: 150%;
+    width: 40%;
+    height: 40%;
+    border-radius: 100px;
+    font-size: 100%;
     font-weight: 200;
     font-family: "poppins", sans-serif;
     flex-direction: column;
@@ -201,3 +211,8 @@ html {
     align-items:center;
   }
   
+  /*~~~~~~~~~~ hidden ~~~~~~~~~~*/
+
+  .hidden {
+    display: none;
+  }

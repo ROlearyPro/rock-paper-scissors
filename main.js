@@ -31,7 +31,8 @@ var opponentSide = document.querySelector('.opponent-area');
 var playerChoiceImage = document.querySelector('.image-box1');
 var opponentChoiceImage = document.querySelector('.image-box2');
 var announcementText = document.querySelector('.announcement');
-
+var imageArea = document.querySelector('.boxes-wrap');
+var buttonsArea = document.querySelector('.button-hide-container');
 
 
 function getRandomIndex(array) {
@@ -151,6 +152,8 @@ function displayThrow(p1Choice, p2Choice) {
 }
 
 function resolveThrow() {
+    buttonsArea.classList.add('hidden');
+    imageArea.classList.remove('hidden');
     var playerMatchup = matchupArray[randomChoiceHelperArray.indexOf(rpsThrow.playerChoice)];
     var resolutionVal = playerMatchup[randomChoiceHelperArray.indexOf(rpsThrow.opponentChoice)];
     console.log(rpsThrow.playerChoice + " VS " + rpsThrow.opponentChoice + "...")
@@ -174,7 +177,7 @@ function resolveThrow() {
         sideBarDisplay();
     }
 
-clearBoard = setTimeout(clearGameDisplay, 10000);
+clearBoard = setTimeout(clearGameDisplay, 2000);
 
 }
 
@@ -183,4 +186,7 @@ function clearGameDisplay()
     playerChoiceImage.innerHTML = ``;
     opponentChoiceImage.innerHTML = ``;
     announcementText.innerText = `Make your choice!`;
+    imageArea.classList.add('hidden');
+    buttonsArea.classList.remove('hidden');
+
 }
