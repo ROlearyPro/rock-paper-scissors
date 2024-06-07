@@ -7,6 +7,7 @@ var savedPlayers = [];
 var choiceButtons = [];
 var simpleButton;
 var advancedButton;
+var clearBoard;
 
 var currentPlayers = {
     player1: null,
@@ -111,6 +112,7 @@ function makeOpponentChoice() {
 }
 function setPlayerChoice() {
     rpsThrow.playerChoice = this.title;
+    clearTimeout(clearBoard);
     makeOpponentChoice();
     resolveThrow();
 }
@@ -172,4 +174,13 @@ function resolveThrow() {
         sideBarDisplay();
     }
 
+clearBoard = setTimeout(clearGameDisplay, 10000);
+
+}
+
+function clearGameDisplay()
+{
+    playerChoiceImage.innerHTML = ``;
+    opponentChoiceImage.innerHTML = ``;
+    announcementText.innerText = `Make your choice!`;
 }

@@ -11,6 +11,7 @@ html {
   
   body {
     background-color: #b672db;
+    margin: 0px;
   }
   
   /*~~~~~~~~~~~~~~~~~~~~ WRAPS ~~~~~~~~~~~~~~~~~~~~*/
@@ -43,9 +44,9 @@ html {
     flex-direction: column;
     justify-content: space-around;
     background-color: #c98bea;
-    height: 150%;
-    padding-left: 15vh;
-    padding-right: 10vh;
+    height: 100%;
+    padding-left: 15%;
+    padding-right: 15%;
 
   }
   .player-side-wrap {
@@ -55,39 +56,39 @@ html {
     flex-direction: column;
     justify-content: space-around;
     background-color: #c98bea;
-    height: 150%;
-    padding-right: 15vh;
-    padding-left: 15vh;
+    height: 100%;
+    padding-right: 15%;
+    padding-left: 15%;
 
   }
   
   .boxes-wrap {
     display: inline-flex;
     justify-content: space-around;
-    width: 64vw;
-    height: 55vh;
+    width: 65em;
+    height: 50vh;
   
   }
   .choices-wrap {
     display: inline-flex;
     justify-content: space-around;
-    width: 64vw;
-    height: 55vh;
+    width: 70%;
+    height: 80vh;
     flex-direction: column;
     align-items: center;
   }
   .choices-container{
     display: flex;
     justify-content: space-around;
-    width: 45vw;
-    height: 25vw;
+    width: 65em;
+    height: 20vw;
     flex-direction: column;  
     align-items: center;
 }
   .miniboxes-wrap {
     display: inline-flex;
     justify-content: space-around;
-    width: 10vw;
+    width: 9vw;
     height: 10vh;
   
   }
@@ -118,7 +119,7 @@ html {
     display: flex;
     width: 10em;
     height: 10em;
-    border: 4px solid black;
+    border: 1px solid black;
     justify-content: space-evenly;
     font-family: "poppins", sans-serif;
     cursor: pointer;
@@ -132,6 +133,7 @@ html {
     justify-content: space-evenly;
     font-family: "poppins", sans-serif;
     cursor: pointer;
+
   }
   
   h4 {
@@ -145,10 +147,10 @@ html {
     background-color: black;
     color: white;
     width: 15vmin;
-    height: 15%;
+    height: 10%;
     border-start-end-radius: 120px;
     border-end-start-radius: 120px;
-    font-size: 150%;
+    font-size: 125%;
     font-weight: 100;
     font-family: "poppins", sans-serif;
   }
@@ -159,9 +161,9 @@ html {
     background-color: #6503c6;
     color: white;
     width: 55vmin;
-    height: 25%;
+    height: 10%;
     border-radius: 50px;
-    font-size: 175%;
+    font-size: 150%;
     font-weight: 200;
     font-family: "poppins", sans-serif;
     flex-direction: column;
@@ -187,18 +189,15 @@ html {
   /*-------img------*/
   
   img {
-    width: 80%;
-    height: 80%;
-    margin: .3em;
+    width: 90%;
+    height: 90%;
+    margin: .2em;
   }
   
   .icon {
     display: flex;
     justify-content: flex-start;
     flex-direction: column-reverse;
-    align-items: flex-end;
+    align-items:center;
   }
   
-  .mini-palette-delete {
-    height: 35px;
-  }
