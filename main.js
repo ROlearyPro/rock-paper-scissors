@@ -1,4 +1,4 @@
-
+// Variables
 var currentGame;
 var currentGameType;
 var playerCurrentWins;
@@ -8,6 +8,8 @@ var choiceButtons = [];
 var simpleButton;
 var advancedButton;
 var clearBoard;
+var storedPlayer;
+var storedOpponent;
 
 var currentPlayers = {
     player1: null,
@@ -23,7 +25,6 @@ var matchupArray = [
 ]
 var randomChoiceHelperArray = ['rock', 'paper', 'scissors', 'lizard', 'alien', 'ufo'];
 var randomChoiceHelperArraySimple = ['rock', 'paper', 'scissors'];
-
 var startPage = document.querySelector('.start-page');
 var gamePage = document.querySelector('.game-page');
 var playerSide = document.querySelector('.player-area');
@@ -33,14 +34,15 @@ var opponentChoiceImage = document.querySelector('.image-box2');
 var announcementText = document.querySelector('.announcement');
 var imageArea = document.querySelector('.boxes-wrap');
 var buttonsArea = document.querySelector('.button-hide-container');
+var playerInnerWrap = document.querySelector('.player-inner-wrap');
+var opponentInnerWrap = document.querySelector('.opponent-inner-wrap');
 
-
+// Functions
 function getRandomIndex(array) {
     return Math.floor(Math.random() * array.length);
 }
 
 function onLoad() {
-
     for (var j = 0; j < 6; j++) {
         choiceButtons[j] = document.querySelector(`.rps-button-${j}`);
         choiceButtons[j].isLocked = false;
@@ -81,11 +83,19 @@ function chooseGameType() {
             choiceButtons[i].classList.add('hidden');
         }
     }
+    playerInnerWrap.innerHTML = `<h3>${currentGame.player1.name}</h3><h3>${currentGame.player1.token} </h3>
+                                    <div class="player-area">
+                                    <div>Wins:${currentGame.player1.wins}</div>
+                                </div>`;
+    opponentInnerWrap.innerHTML = `<h3>${currentGame.player2.name}</h3><h3> ${currentGame.player2.token}</h3>
+                                <div class="opponent-area">
+                                <div>Wins:${currentGame.player2.wins}</div>
+                            </div>`;
+    playerSide = document.querySelector('.player-area');
+    opponentSide = document.querySelector('.opponent-area');
     startPage.classList.add('hidden');
     gamePage.classList.remove('hidden');
-
 }
-
 
 function createGame(p1, p2, gameType = 'advanced') {
     gameObject =
@@ -95,22 +105,32 @@ function createGame(p1, p2, gameType = 'advanced') {
         rpsType: gameType,
         currentThrows: rpsThrow,
     }
+    if (typeof (Storage)) {
+        if (sessionStorage.playerData) {
+            storedPlayer = JSON.parse(sessionStorage.getItem('playerData'));
+            gameObject.player1 = storedPlayer;
+        } else { }
+        if (sessionStorage.opponentData) {
+            storedOpponent = JSON.parse(sessionStorage.getItem('opponentData'));
+            gameObject.player2 = storedOpponent;
+        }
+        else { }
+    }
     return gameObject;
 }
 
 function makeOpponentChoice() {
     if (currentGame.rpsType === 'advanced') {
         var computerThrow = randomChoiceHelperArray[getRandomIndex(randomChoiceHelperArray)];
-        console.log(computerThrow);
         rpsThrow.opponentChoice = computerThrow;
     }
     else {
         var computerThrow = randomChoiceHelperArraySimple[getRandomIndex(randomChoiceHelperArraySimple)];
-        console.log(computerThrow);
         rpsThrow.opponentChoice = computerThrow;
     }
     return computerThrow;
 }
+
 function setPlayerChoice() {
     rpsThrow.playerChoice = this.title;
     clearTimeout(clearBoard);
@@ -123,6 +143,7 @@ function sideBarDisplay() {
     opponentSide.innerHTML = `<div>Wins:${currentGame.player2.wins}</div>`
 
 }
+
 function displayThrow(p1Choice, p2Choice) {
     var thrownImageArray = ['', ''];
     var tempArray = [p1Choice, p2Choice];
@@ -148,7 +169,6 @@ function displayThrow(p1Choice, p2Choice) {
     }
     playerChoiceImage.innerHTML = `<img src=${thrownImageArray[0]} alt="player 1 image">`
     opponentChoiceImage.innerHTML = `<img src=${thrownImageArray[1]} alt="player 2 image">`
-
 }
 
 function resolveThrow() {
@@ -156,37 +176,32 @@ function resolveThrow() {
     imageArea.classList.remove('hidden');
     var playerMatchup = matchupArray[randomChoiceHelperArray.indexOf(rpsThrow.playerChoice)];
     var resolutionVal = playerMatchup[randomChoiceHelperArray.indexOf(rpsThrow.opponentChoice)];
-    console.log(rpsThrow.playerChoice + " VS " + rpsThrow.opponentChoice + "...")
     displayThrow(rpsThrow.playerChoice, rpsThrow.opponentChoice);
     if (!resolutionVal) {
-        console.log("Draw!");
         announcementText.innerText = "Draw!";
     }
     else if (resolutionVal === 1) {
-        console.log("YOU WIN!");
         announcementText.innerText = "YOU WIN!";
-
         currentGame.player1.wins += 1;
         sideBarDisplay();
     }
     else {
-        console.log("You lose...");
         announcementText.innerText = "You lose...";
-
         currentGame.player2.wins += 1;
         sideBarDisplay();
     }
 
-clearBoard = setTimeout(clearGameDisplay, 2000);
-
+    if (typeof (Storage)) {
+        sessionStorage.setItem('playerData', JSON.stringify(currentGame.player1));
+        sessionStorage.setItem('opponentData', JSON.stringify(currentGame.player2));
+    }
+    clearBoard = setTimeout(clearGameDisplay, 2000);
 }
 
-function clearGameDisplay()
-{
+function clearGameDisplay() {
     playerChoiceImage.innerHTML = ``;
     opponentChoiceImage.innerHTML = ``;
     announcementText.innerText = `Make your choice!`;
     imageArea.classList.add('hidden');
     buttonsArea.classList.remove('hidden');
-
 }
